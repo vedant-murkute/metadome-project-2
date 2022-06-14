@@ -128,13 +128,13 @@ var Monster = class Monster{
     if (!state.level.touches(newPos, this.size, "wall")) {
       return new Monster(newPos, this.speed);
     } else {
-      return new Monster(this.pos, this.speed.times(-1));
+      return new Monster(newPos, this.speed.times(-1));
     }
   }
 
   collide(state){
     let player = state.player;
-    if(this.pos.y < player.pos.y + player.size.y){
+    if( player.pos.y + player.size.y < this.pos.y + 0.2 ){
       let filtered = state.actors.filter(a => a!=this);
       return new State(state.level, filtered, state.status);
     }else{
@@ -143,7 +143,6 @@ var Monster = class Monster{
   }
 }
  
-
 Monster.prototype.size = new Vec(1, 2);
 
 var levelChars = {
